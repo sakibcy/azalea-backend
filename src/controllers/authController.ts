@@ -107,21 +107,26 @@ export const loginPost = async (req: Request, res: Response) => {
         }
 
         const user = await Auth.findOne({ email });
-
+        // res.send(user.password)
+        // console.log(user.password);
+        
         if (!user) {
             return res.status(400).json(
                 generateResponse(true, 400, "Unauthorized", "No user found for this email address")
             );
         }
 
-        const isMatch = bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        if (user && !bcrypt.compareSync(password, user.password)) {
             return res.status(400).json(
                 generateResponse(true, 400, "Unauthorized", "Incorrect password")
             );
         }
 
         const token = createToken(user.id);
+        if (!token) {
+            throw new Error("Invalid token")
+        }
+
         res.setHeader(JWT_TOKEN_NAME, token).cookie(JWT_TOKEN_NAME, token, { httpOnly: true, maxAge: maxAge * 1000 });
 
         return res.status(200).json({
