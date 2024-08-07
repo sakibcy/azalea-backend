@@ -8,13 +8,24 @@ interface ConnectOptions extends mongoose.ConnectOptions {
     useNewUrlParser?: boolean;
 }
 
-module.exports = async function () {
+module.exports = function () {
     const dbString = DB ?? "default_db_string";
     try {
-        await mongoose.connect(dbString);
+        mongoose.connect(dbString);
         winston.info(`Connected to database: ${dbString} `);
-    } catch (error) {
-        console.log(error);
-        
+    } catch (err) {
+        console.log(err)
     }
 }
+
+// async function () {
+//     const dbString = DB ?? "default_db_string";
+//     try {
+//         mongoose.set('strictQuery', false)
+//         mongoose.connect(dbString)
+//         winston.info(`Connected to database: ${dbString} `);
+//     } catch (error) {
+//         console.log(error);
+//
+//     }
+// }

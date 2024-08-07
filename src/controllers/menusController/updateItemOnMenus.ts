@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-const Menus = require('../../models/Menus');
+const Menu = require('../../models/Menu');
 
 export const updateItemOnMenus = async (req: Request, res: Response) => {
     try {
@@ -11,7 +11,7 @@ export const updateItemOnMenus = async (req: Request, res: Response) => {
             description
         } = req.body;
 
-        const item = await Menus.findOne({id: req.params.id});
+        const item = await Menu.findOne({id: req.params.id});
         if (!item) {
             return res.status(404).json({message: 'Item not found'});
         }

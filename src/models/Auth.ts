@@ -1,8 +1,10 @@
+// import mongoose, {Schema} from 'mongoose';
+
 const Mongoose = require('mongoose');
 
-const { Schema } = Mongoose;
+const Schema = Mongoose.Schema;
 
-const AuthSchema = new Schema({
+const Auth = new Schema({
     email: {
         type: String,
         required: true,
@@ -14,4 +16,4 @@ const AuthSchema = new Schema({
     }
 });
 
-module.exports = Mongoose.model('Auth', AuthSchema);
+module.exports = Mongoose.model('Auth', Auth);

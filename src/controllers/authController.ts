@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JWT_TOKEN_NAME, SALT_ROUND_DB } from "../config";
 import { generateResponse } from "../utils/generateResponse";
-const Auth = require("../models/authSchema");
+const Auth = require("../models/Auth");
 
 const maxAge = 30 * 24 * 60 * 60; // 30 days
 
