@@ -1,16 +1,7 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, {Document, Mongoose, Schema} from 'mongoose';
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-interface IMenu extends Document {
-    id: number;
-    image: string;
-    name: string;
-    price: number;
-    category: string;
-    description: string;
-}
-
-const menusSchema: Schema<IMenu> = new mongoose.Schema({
+const MenusSchema = new Schema({
     id: {
         type: Number,
         unique: true
@@ -41,8 +32,8 @@ const menusSchema: Schema<IMenu> = new mongoose.Schema({
     timestamps: true // Adds createdAt and updatedAt fields
 });
 
-menusSchema.plugin(AutoIncrement, { inc_field: 'id', start_seq: 1 });
+MenusSchema.plugin(AutoIncrement, { inc_field: 'id', start_seq: 1 });
 
-const Menus = mongoose.model('Item', menusSchema);
+// export default mongoose.model('Item', MenusSchema);
 
-module.exports = Menus;
+module.exports = mongoose.model('Menus', MenusSchema);

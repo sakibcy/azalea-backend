@@ -1,5 +1,9 @@
 import express from "express";
-import { deleteItemOnMenus, getMenus, getItemById, addItemToMenus, updateItemOnMenus } from "../controllers/menusController";
+import addItemToMenus from "../controllers/menusController/addItemsToMenus";
+import getMenus from "../controllers/menusController/getMenus";
+import getItemById from "../controllers/menusController/getItemById";
+import {updateItemOnMenus} from "../controllers/menusController/updateItemOnMenus";
+import deleteItemOnMenus from "../controllers/menusController/deleteItemOnMenus";
 
 const router = express.Router();
 
