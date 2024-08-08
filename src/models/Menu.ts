@@ -33,7 +33,7 @@ const MenuSchema = new Schema({
         required: true,
         trim: true
     },
-    isActive: {
+    isAvailable: {
         type: Boolean,
         default: true
     },

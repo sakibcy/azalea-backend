@@ -7,7 +7,7 @@ export default async (req: Request, res: Response) => {
         const name = req.body.name;
         const description = req.body.description;
         const price = req.body.price;
-        const isActive = req.body.isActive;
+        const isAvailable = req.body.isAvailable;
         const image = req.file;
 
         if (!description || !name) {
@@ -31,7 +31,7 @@ export default async (req: Request, res: Response) => {
             name,
             description,
             price,
-            isActive,
+            isAvailable,
             imageUrl,
             imageKey
         });
