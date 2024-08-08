@@ -6,6 +6,7 @@ const API_VERSION = 'v1';
 
 const JWT_TOKEN_NAME = 'x-auth-token';
 const SALT_ROUND_DB = 10;
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY as string;
 
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID as string;
 const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY as string;
@@ -16,6 +17,7 @@ export {
     PORT,
     DB,
     JWT_TOKEN_NAME,
+    JWT_SECRET_KEY,
     SALT_ROUND_DB,
     API_VERSION,
     AWS_ACCESS_KEY_ID,

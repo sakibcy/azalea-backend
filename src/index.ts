@@ -1,4 +1,4 @@
-import express, {Express} from "express";
+import express, {Express, Request, Response} from "express";
 import { PORT } from "./config";
 
 const app: Express = express();
@@ -9,7 +9,7 @@ require('./startup/routes')(app);
 const port = PORT || 3000;
 
 // Define the catch-all route (404 Not Found)
-app.all('*', (req, res) => {
+app.all('*', (req: Request, res: Response) => {
     res.status(404).json({
         error: true,
         status: 404,

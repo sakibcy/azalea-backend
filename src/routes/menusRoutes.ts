@@ -6,6 +6,7 @@ import deleteItemOnMenus from "../controllers/menusController/deleteItemOnMenus"
 import getMenus from "../controllers/menusController/getMenus";
 import multer from "multer";
 import getMenuById from "../controllers/menusController/getMenuById";
+import {requireAuth} from "../middleware/auth";
 
 const router = express.Router();
 
@@ -18,12 +19,12 @@ router.get(`/menu/by-slug/:slug`, getMenuBySlug);
 
 
 
-router.post(`/add/menu`, upload.single('image'), addItemToMenus);
+router.post(`/add/menu`, requireAuth, upload.single('image'), addItemToMenus);
 
 // update an Existing Menu
-router.put(`/menu/:id`,upload.single('image'), updateItemOnMenus);
+router.put(`/menu/:id`, requireAuth, upload.single('image'), updateItemOnMenus);
 
 // delete an Existing Menu
-router.delete(`/menu/:id`, deleteItemOnMenus);
+router.delete(`/menu/:id`, requireAuth, deleteItemOnMenus);
 
 export default router;
