@@ -7,11 +7,11 @@ export default async (req: Request, res: Response) => {
     try {
         const item = await Menu.findOne({id});
         if (!item) {
-            return res.status(404).json({message: 'No item found'});
+            return res.status(404).json({message: 'No Menu found'});
         }
 
         await Menu.deleteOne({id});
-        res.status(200).json({message: 'Item deleted successfully'});
+        res.status(200).json({message: 'Menu deleted successfully'});
     } catch (err: any) {
         res.status(500).json({message: err.message});
     }

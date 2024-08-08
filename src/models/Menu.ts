@@ -1,17 +1,13 @@
 import mongoose, {Schema} from 'mongoose';
+import slugify from 'slugify';
 
 const AutoIncrement = require('mongoose-sequence')(mongoose);
-const slug = require('mongoose-slug-generator');
-
-const options = {
-    separator: '-',
-    lang: 'en',
-    truncate: 120
-};
-
-mongoose.plugin(slug, options);
 
 const MenuSchema = new Schema({
+    id: {
+        type: Number,
+        unique: true
+    },
     name: {
         type: String,
         required: true,
@@ -46,8 +42,21 @@ const MenuSchema = new Schema({
         type: Date,
         default: Date.now
     }
-}, {
-    timestamps: true // Adds createdAt and updatedAt fields
 });
 
-module.exports = mongoose.model('Menu', MenuSchema);
+MenuSchema.plugin(AutoIncrement, { inc_field: 'id', start_seq: 1 });
+
+// Pre-save hook to generate slug using slugify
+MenuSchema.pre('save', function (next) {
+    if (!this.isModified('name')) {
+        return next(); // Skip if name hasn't changed
+    }
+    this.slug = slugify(this.name, {
+        lower: true,
+        locale: 'en'
+    });
+    next();
+});
+
+const Menu = mongoose.model('Menu', MenuSchema);
+module.exports = Menu;

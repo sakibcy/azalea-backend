@@ -12,7 +12,7 @@ mongoose.plugin(slug, options);
 // Category Schema
 const CategorySchema = new Schema({
     _id: {
-        type: Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         auto: true
     },
     name: {
