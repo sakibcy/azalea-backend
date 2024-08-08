@@ -18,7 +18,7 @@ router.get(`/menu/by-slug/:slug`, getMenuBySlug);
 
 
 
-router.post(`/add/`, upload.single('image'), addItemToMenus);
+router.post(`/add/menu`, upload.single('image'), addItemToMenus);
 
 // update an Existing Menu
 router.put(`/menu/:id`,upload.single('image'), updateItemOnMenus);
