@@ -3,10 +3,10 @@ const Menu = require('../../models/Menu');
 
 export default async (req: Request, res: Response) => {
     try {
-        const products = await Menu.find();
+        const menus = await Menu.find();
 
         res.status(200).json({
-            products
+            menus
         });
     } catch (error) {
         res.status(400).json({

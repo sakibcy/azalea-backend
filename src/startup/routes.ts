@@ -2,8 +2,8 @@ import express, { Application } from "express";
 
 import authRoutes from "../routes/authRoutes";
 import menusRoutes from "../routes/menusRoutes";
-import { API_VERSION } from "../config";
 import cors from 'cors';
+import cartRoutes from "../routes/cartRoutes";
 
 
 module.exports = function (app: Application) {
@@ -19,5 +19,6 @@ module.exports = function (app: Application) {
     
     app.use(`/`, authRoutes);
     app.use(`/`, menusRoutes);
+    app.use(`/`, cartRoutes);
     // app.use(`/authenticated`, authenticated);
 }
