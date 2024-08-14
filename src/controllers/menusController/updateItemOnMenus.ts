@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 import {AWS_ACCESS_KEY_ID, AWS_REGION, AWS_S3_BUCKET_NAME, AWS_SECRET_ACCESS_KEY} from "../../config";
 import AWS from "aws-sdk";
 import {s3Upload} from "../../utils/storage";
+import {generateResponse} from "../../utils/generateResponse";
 const Menu = require('../../models/Menu');
 
 export const updateItemOnMenus = async (req: Request, res: Response) => {
@@ -71,6 +72,8 @@ export const updateItemOnMenus = async (req: Request, res: Response) => {
             })
         }
     } catch (err: any) {
-        return res.status(400).json({message: err.message});
+        return  res
+                    .status(400)
+                    .json(generateResponse(true, 400, 'Error', err.message));
     }
 }

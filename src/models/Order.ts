@@ -6,6 +6,10 @@ const OrderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Cart'
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
     total: {
         type: Number,
         default: 0
