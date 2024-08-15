@@ -89,3 +89,19 @@ export const updateTaxRates = async (req: Request, res: Response) => {
     }
 }
 
+export async function deleteTaxRatesAndFees(req: Request, res: Response) {
+    const id = req.params.id;
+
+    try {
+        const item = await Tax.findOne({_id: id});
+        console.log(item)
+        if (!item) {
+            return res.status(404).json({message: 'No item found'});
+        }
+
+        await Tax.deleteOne({_id: id});
+        res.status(200).json({message: 'Deleted successfully!'});
+    } catch (err: any) {
+        res.status(500).json({message: err.message});
+    }
+}
