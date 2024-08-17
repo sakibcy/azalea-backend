@@ -7,7 +7,6 @@ export default async (req: Request, res: Response) => {
     const id = req.params.id;
 
     try {
-        console.log(`Searching for item with ID: ${id}`);
         const item = await Menu.findOne({id, isActive: true});
         if (!item) {
             return res

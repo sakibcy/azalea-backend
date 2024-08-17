@@ -5,6 +5,7 @@ import menusRoutes from "../routes/menusRoutes";
 import cors from 'cors';
 import cartRoutes from "../routes/cartRoutes";
 import taxRoutes from "../routes/taxRoutes";
+import orderRoutes from "../routes/orderRoutes";
 
 
 module.exports = function (app: Application) {
@@ -22,5 +23,6 @@ module.exports = function (app: Application) {
     app.use(`/`, menusRoutes);
     app.use(`/`, cartRoutes);
     app.use(`/`, taxRoutes);
+    app.use(`/`, orderRoutes);
     // app.use(`/authenticated`, authenticated);
 }
