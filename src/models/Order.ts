@@ -1,19 +1,26 @@
-import mongoose, {Schema} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+const { ORDER_STATUS } = require("../constants");
+// const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const {ORDER_STATUS} = require("../constants");
+// Define CartItemSchema
+const CartItemSchema = new Schema({
+    name: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+    imageKey: { type: String, required: true },
+    price: { type: Number, required: true },
+    description: { type: String, required: true },
+    slug: { type: String, required: true },
+    id: { type: Number, required: true },
+    quantity: { type: Number, required: true },
+    subTotal: { type: Number, required: true }
+});
 
-const AutoIncrement = require('mongoose-sequence')(mongoose);
-
-// Order Schema
+// Define OrderSchema
 const OrderSchema = new Schema({
-    id: {
-        type: Number,
-        unique: true
-    },
     user: {
         type: String,
         default: 'Guest',
-        require: true
+        required: true
     },
     status: {
         type: String,
@@ -24,31 +31,7 @@ const OrderSchema = new Schema({
             ORDER_STATUS.Cancelled
         ]
     },
-    items: [
-        {
-            itemId: {
-                type: Number,
-                required: true
-            },
-            item: {
-                type: mongoose.Types.ObjectId,
-                ref: 'Menu',
-                required: true
-            },
-            price: {
-                type: Number,
-                required: true
-            },
-            quantity: {
-                type: Number,
-                required: true
-            },
-            subTotalPrice: {
-                type: Number,
-                required: true
-            },
-        }
-    ],
+    items: [CartItemSchema],
     subTotalPrice: {
         type: Number,
         required: true
@@ -70,8 +53,14 @@ const OrderSchema = new Schema({
         type: Date,
         default: Date.now
     }
+}, {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
-OrderSchema.plugin(AutoIncrement, {inc_field: 'id', start_seq: 1});
+// Apply the AutoIncrement plugin only once
+// OrderSchema.plugin(AutoIncrement, { inc_field: 'id', start_seq: 1 });
 
-module.exports = mongoose.model('Order', OrderSchema);
+const Order = mongoose.model('Order', OrderSchema);
+
+module.exports = Order;
