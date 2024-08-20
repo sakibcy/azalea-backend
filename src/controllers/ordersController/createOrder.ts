@@ -3,14 +3,15 @@ const Order = require('../../models/Order');
 
 export default async (req: Request, res: Response) => {
     try {
-        const { user, items, subTotalPrice, taxAndFeesRateTotal, taxAndFeesPriceTotal, totalPrice } = req.body;
+        const { uuid, user, items, subTotalPrice, taxAndFeesRateTotal, taxAndFeesPriceTotal, totalPrice } = req.body;
 
-        if (!user || !items || !subTotalPrice || !taxAndFeesRateTotal || !taxAndFeesPriceTotal || !totalPrice) {
+        if (!uuid || !user || !items || !subTotalPrice || !taxAndFeesRateTotal || !taxAndFeesPriceTotal || !totalPrice) {
           return res.status(400).json({ message: 'Missing required order details' });
         }
 
         // Create a new Order object
         const newOrder = new Order({
+            uuid,
             user,
             items,
             subTotalPrice,

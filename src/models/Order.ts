@@ -17,6 +17,7 @@ const CartItemSchema = new Schema({
 
 // Define OrderSchema
 const OrderSchema = new Schema({
+    uuid: {type: String, required: true},
     user: {
         type: String,
         default: 'Guest',
