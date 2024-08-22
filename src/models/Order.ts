@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-const { ORDER_STATUS } = require("../constants");
+import {ORDER_STATUS} from "../constants";
 // const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 // Define CartItemSchema
