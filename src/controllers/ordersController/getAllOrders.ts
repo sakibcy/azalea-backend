@@ -7,7 +7,6 @@ export default async (req: Request, res: Response) => {
 
     try {
         const orders = await Order.find();
-        console.log(orders)
         res.status(200).json(orders);
     } catch (err: any) {
         res.status(500).json(
