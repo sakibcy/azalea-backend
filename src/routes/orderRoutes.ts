@@ -8,6 +8,7 @@ import updateOrder from "../controllers/ordersController/updateOrder";
 import getOrdersbyUUID from "../controllers/ordersController/getOrdersbyUUID";
 import getAllActiveOrders from "../controllers/ordersController/getAllActiveOrders";
 import getAllCancelledOrders from "../controllers/ordersController/getAllCancelledOrders";
+import getAllDeliveredOrders from "../controllers/ordersController/getAllDeliveredOrders";
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.post('/order', createOrder);
 router.delete('/order/:id', requireAuth, deleteOrder);
 router.get('/orders', requireAuth, getAllOrders);
 router.get('/orders/active', requireAuth, getAllActiveOrders);
+router.get('/orders/delivered', requireAuth, getAllDeliveredOrders);
 router.get('/orders/cancelled', requireAuth, getAllCancelledOrders);
 router.get('/order/:id', getOrderById);
 router.get('/orders/:uuid', getOrdersbyUUID);
