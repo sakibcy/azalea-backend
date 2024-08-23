@@ -9,6 +9,7 @@ import getOrdersbyUUID from "../controllers/ordersController/getOrdersbyUUID";
 import getAllActiveOrders from "../controllers/ordersController/getAllActiveOrders";
 import getAllCancelledOrders from "../controllers/ordersController/getAllCancelledOrders";
 import getAllDeliveredOrders from "../controllers/ordersController/getAllDeliveredOrders";
+import getActiveOrdersByUUID from "../controllers/ordersController/getActiveOrdersByUUID";
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.get('/orders/delivered', requireAuth, getAllDeliveredOrders);
 router.get('/orders/cancelled', requireAuth, getAllCancelledOrders);
 router.get('/order/:id', getOrderById);
 router.get('/orders/:uuid', getOrdersbyUUID);
+router.get('/orders/active/:uuid', getActiveOrdersByUUID);
 router.put('/order/:id', requireAuth, updateOrder);
 
 export default router;
