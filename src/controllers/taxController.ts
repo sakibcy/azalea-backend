@@ -52,14 +52,14 @@ export const updateTaxRates = async (req: Request, res: Response) => {
                 .json(generateResponse(true, 400, 'Error', 'Name and rate must be provided'));
         }
 
-        const tax = await Tax.findOne({name});
+        const tax = await Tax.findOne({_id: req.params.id});
 
         if (!tax) {
             return res
                 .status(404)
                 .json(
                     generateResponse(true, 404, 'Error',
-                        'Please provide a valid tax name, example: State Tax, Country Tac')
+                        'The Tax Item cannot be found')
                 );
         }
 
@@ -85,7 +85,7 @@ export const updateTaxRates = async (req: Request, res: Response) => {
         console.log(`Error: ${err.message}`);
         return res
             .status(400)
-            .json(generateResponse(true, 400, 'Error', 'Something went worng'));
+            .json(generateResponse(true, 400, 'Error', 'Something went wrong'));
     }
 }
 
