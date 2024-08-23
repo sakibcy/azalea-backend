@@ -4,9 +4,9 @@ import {requireAuth} from "../middleware/auth";
 
 const router = express.Router();
 
-router.get('/taxrates', getTaxRates);
-router.post('/taxrates', requireAuth, addTaxRates);
-router.put('/taxrates', requireAuth, updateTaxRates);
-router.delete('/taxrates/:id', requireAuth, deleteTaxRatesAndFees);
+router.get('/tax-rates', getTaxRates);
+router.post('/tax-rates', requireAuth, addTaxRates);
+router.put('/tax-rates', requireAuth, updateTaxRates);
+router.delete('/tax-rates/:id', requireAuth, deleteTaxRatesAndFees);
 
 export default router;
