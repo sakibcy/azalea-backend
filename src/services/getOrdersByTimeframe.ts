@@ -3,27 +3,31 @@
 const Order = require('../models/Order');
 
 export const getOrdersByTimeframe = async (timeframe: string) => {
-    let matchStage: any = {};
+    let matchStage: { format?: string } & { [key: string]: any } = {};
 
     switch (timeframe) {
         case 'daily':
             matchStage = {
-                $dateToString: {format: "%Y-%m-%d", date: "$createdAt"}
+                timeframe: { $dateToString: {
+                        format: "%Y-%m-%d", date: "$created" }}
             };
             break;
         case 'weekly':
             matchStage = {
-                $isoWeek: {date: "$createdAt"}
+                year: { $isoWeekYear: "$created" },  // ISO week year
+                week: { $isoWeek: "$created" },  // ISO week number
             };
             break;
         case 'monthly':
             matchStage = {
-                $dateToString: {format: "%Y-%m", date: "$createdAt"}
+                timeframe: { $dateToString: {
+                    format: "%Y-%m", date: "$created" } }
             };
             break;
         case 'yearly':
             matchStage = {
-                $dateToString: {format: "%Y", date: "$createdAt"}
+                timeframe: { $dateToString: {
+                    format: "%Y", date: "$created" } }
             };
             break;
         default:
@@ -36,9 +40,7 @@ export const getOrdersByTimeframe = async (timeframe: string) => {
         },
         {
             $group: {
-                _id: {
-                    timeframe: {$dateToString: {format: matchStage.$dateToString.format, date: "$created"}}
-                },
+                _id: matchStage,
                 totalOrders: {$sum: 1},
                 totalWithOutTaxAndFees: {$sum: "$subTotalPrice"},
                 totalTaxAndFees: {$sum: "$taxAndFeesPriceTotal"},
