@@ -46,6 +46,12 @@ export const getOrdersByTimeframe = async (timeframe: string) => {
 
     const pipeline = [];
 
+    pipeline.push({
+        $match: {
+            status: 'Delivered'
+        }
+    });
+
     if (timeframe === 'daily') {
         pipeline.push({
             $match: {
@@ -55,9 +61,6 @@ export const getOrdersByTimeframe = async (timeframe: string) => {
     }
 
     pipeline.push(
-        {
-            $unwind: "$items"  // Unwind items array
-        },
         {
             $group: {
                 _id: matchStage,
