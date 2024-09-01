@@ -16,6 +16,10 @@ const AddOnSchema = new Schema({
         type: Number,
         required: true
     },
+    isAvailable: {
+        type: Boolean,
+        default: true
+    },
     updated: Date,
     created: {
         type: Date,

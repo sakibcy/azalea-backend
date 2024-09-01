@@ -7,6 +7,7 @@ const AddOn = require('../../models/AddOn');
 export default async (req: Request, res: Response) => {
     const name = req.body.name;
     const price = req.body.price;
+    const isAvailable = req.body.isAvailable;
     const image = req.file;
 
     if (!name) {
@@ -33,6 +34,7 @@ export default async (req: Request, res: Response) => {
         const addOn = new AddOn({
             name,
             price,
+            isAvailable,
             imageUrl,
             imageKey
         });
