@@ -5,9 +5,7 @@ import {generateResponse} from "../../utils/generateResponse";
 const AddOn = require('../../models/AddOn');
 
 export default async (req: Request, res: Response) => {
-    const name = req.body.name;
-    const price = req.body.price;
-    const isAvailable = req.body.isAvailable;
+    const { name, price, isAvailable } = req.body;
     const image = req.file;
 
     if (!name) {
@@ -48,10 +46,10 @@ export default async (req: Request, res: Response) => {
                     ...generateResponse(false, 200, 'Success', 'Add On Added Successfully!'),
                     addon: savedAddOn
                 });
-        } catch (error) {
+        } catch (error: any) {
             return res
                 .status(400)
-                .json(generateResponse(true, 400, 'Error', 'Saving into Database Failed'))
+                .json(generateResponse(true, 400, 'Error', `Saving into Database Failed - ${error.message}`))
         }
     } catch (error) {
         return res
