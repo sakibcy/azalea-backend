@@ -5,6 +5,7 @@ import addAddOn from "../controllers/addOnControllers/addAddOn";
 import getAddOn from "../controllers/addOnControllers/getAddOn";
 import updateAddOn from "../controllers/addOnControllers/updateAddOn";
 import getAddOnById from "../controllers/addOnControllers/getAddOnById";
+import deleteAddOn from "../controllers/addOnControllers/deleteAddOn";
 
 const router = express.Router();
 
@@ -22,6 +23,6 @@ router.post(`/addon`, requireAuth, upload.single('image'), addAddOn);
 router.put(`/addon/:id`, requireAuth, upload.single('image'), updateAddOn);
 
 // // delete an Existing AddOn
-// router.delete(`/addon/:id`, requireAuth, deleteAddOn);
+router.delete(`/addon/:id`, requireAuth, deleteAddOn);
 
 export default router;
