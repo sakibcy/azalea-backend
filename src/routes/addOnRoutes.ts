@@ -4,6 +4,7 @@ import {requireAuth} from "../middleware/auth";
 import addAddOn from "../controllers/addOnControllers/addAddOn";
 import getAddOn from "../controllers/addOnControllers/getAddOn";
 import updateAddOn from "../controllers/addOnControllers/updateAddOn";
+import getAddOnById from "../controllers/addOnControllers/getAddOnById";
 
 const router = express.Router();
 
@@ -12,7 +13,8 @@ const upload = multer({ storage });
 
 // get all addons
 router.get(`/addon`, getAddOn);
-// router.get(`/addon/:id`, getAddOnById);
+
+router.get(`/addon/:id`, getAddOnById);
 
 router.post(`/addon`, requireAuth, upload.single('image'), addAddOn);
 
