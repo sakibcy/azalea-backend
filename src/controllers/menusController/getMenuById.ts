@@ -7,7 +7,7 @@ export default async (req: Request, res: Response) => {
     const id = req.params.id;
 
     try {
-        const item = await Menu.findOne({id, isActive: true});
+        const item = await Menu.findOne({id});
         if (!item) {
             return res
                 .status(404)

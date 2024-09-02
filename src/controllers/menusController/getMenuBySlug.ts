@@ -5,7 +5,7 @@ export default async (req: Request, res: Response) => {
     const slug = req.params.slug;
 
     try {
-        const item = await Menu.findOne({slug, isActive: true});
+        const item = await Menu.findOne({slug});
         if (!item) {
             return res.status(404).json({message: 'Item not found'});
         }
