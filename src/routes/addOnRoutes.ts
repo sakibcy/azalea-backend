@@ -3,6 +3,7 @@ import multer from "multer";
 import {requireAuth} from "../middleware/auth";
 import addAddOn from "../controllers/addOnControllers/addAddOn";
 import getAddOn from "../controllers/addOnControllers/getAddOn";
+import updateAddOn from "../controllers/addOnControllers/updateAddOn";
 
 const router = express.Router();
 
@@ -16,8 +17,8 @@ router.get(`/addon`, getAddOn);
 router.post(`/addon`, requireAuth, upload.single('image'), addAddOn);
 
 // update an Existing AddOn
-// router.put(`/addon/:id`, requireAuth, upload.single('image'), updateAddOn);
-//
+router.put(`/addon/:id`, requireAuth, upload.single('image'), updateAddOn);
+
 // // delete an Existing AddOn
 // router.delete(`/addon/:id`, requireAuth, deleteAddOn);
 
