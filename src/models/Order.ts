@@ -1,18 +1,27 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 import {ORDER_STATUS} from "../constants";
 // const AutoIncrement = require('mongoose-sequence')(mongoose);
 
+const AddOnSchema = new Schema({
+    _id: {type: String, required: true},
+    name: {type: String, required: true},
+    imageUrl: {type: String, required: true},
+    price: {type: Number, required: true},
+    isAvailable: {type: Boolean, required: true},
+});
+
 // Define CartItemSchema
 const CartItemSchema = new Schema({
-    name: { type: String, required: true },
-    imageUrl: { type: String, required: true },
-    imageKey: { type: String, required: true },
-    price: { type: Number, required: true },
-    description: { type: String, required: true },
-    slug: { type: String, required: true },
-    id: { type: Number, required: true },
-    quantity: { type: Number, required: true },
-    subTotal: { type: Number, required: true }
+    name: {type: String, required: true},
+    imageUrl: {type: String, required: true},
+    imageKey: {type: String, required: true},
+    price: {type: Number, required: true},
+    description: {type: String, required: true},
+    slug: {type: String, required: true},
+    id: {type: Number, required: true},
+    quantity: {type: Number, required: true},
+    subTotal: {type: Number, required: true},
+    addons: [AddOnSchema],
 });
 
 // Define OrderSchema
@@ -55,8 +64,8 @@ const OrderSchema = new Schema({
         default: Date.now
     }
 }, {
-    toObject: { virtuals: true },
-    toJSON: { virtuals: true }
+    toObject: {virtuals: true},
+    toJSON: {virtuals: true}
 });
 
 // Apply the AutoIncrement plugin only once
