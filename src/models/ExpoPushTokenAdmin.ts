@@ -1,13 +1,13 @@
 import mongoose, {Document, Schema} from 'mongoose';
 
-interface IExpoPushTokenAdmin extends Document {
-    token: string;
+export interface IExpoPushTokenAdmin extends Document {
+    expoPushToken: string;
     createdAt: Date;
     updatedAt: Date;
 }
 
 const ExpoPushTokenSchemaAdmin: Schema = new Schema<IExpoPushTokenAdmin>({
-    token: {
+    expoPushToken: {
         type: String,
         required: true,
         unique: true,

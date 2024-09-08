@@ -1,4 +1,6 @@
 import {Request, Response} from "express";
+import {sendNewOrderNotificationToAdmin} from "../../utils/expoPushTokenAdmin";
+import {generateResponse} from "../../utils/generateResponse";
 
 const Order = require('../../models/Order');
 
@@ -38,10 +40,20 @@ export default async (req: Request, res: Response) => {
         res
             .status(201)
             .json({message: 'Order created successfully', order: savedOrder});
+
+        await sendNewOrderNotificationToAdmin(newOrder._id, newOrder.user);
+
     } catch (error) {
         console.error(error);
         res
             .status(500)
-            .json({message: 'Internal server error'});
+            .json(
+                generateResponse(
+                    true,
+                    500,
+                    'Error',
+                    'Internal Server error'
+                )
+            );
     }
 }
